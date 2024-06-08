@@ -16,3 +16,16 @@ export interface EditProduct {
   initialQuantity: number;
   initialPrice: number;
 }
+
+export interface CartItem {
+  _id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  productId: string;
+}
+
+export interface AddToCartReponse {
+  item: CartItem;
+  product: Product;
+}

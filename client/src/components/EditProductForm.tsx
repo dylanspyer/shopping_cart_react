@@ -1,21 +1,35 @@
-import { useState } from "react";
-import { EditProduct } from "../types/index.ts";
+import { useState, SyntheticEvent } from "react";
+import { EditProduct, Product } from "../types/index.ts";
 
-interface EditProductProps extends EditProduct {}
+interface EditProductProps extends EditProduct {
+  _id: string;
+  onEditProduct: (product: Product) => void;
+  toggleEditForm: () => void;
+}
 
 export const EditProductForm = ({
   initialTitle,
   initialPrice,
   initialQuantity,
+  onEditProduct,
+  _id,
+  toggleEditForm,
 }: EditProductProps) => {
   const [title, setTitle] = useState(initialTitle);
   const [price, setPrice] = useState(initialPrice);
   const [quantity, setQuantity] = useState(initialQuantity);
 
+  const handleEditProduct = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    const product = { _id, title, price, quantity };
+    await onEditProduct(product);
+    toggleEditForm();
+  };
+
   return (
     <div className="edit-form">
       <h3>Edit Product</h3>
-      <form>
+      <form onSubmit={handleEditProduct}>
         <div className="input-group">
           <label htmlFor="product-name">Product Name</label>
           <input
@@ -51,7 +65,9 @@ export const EditProductForm = ({
 
         <div className="actions form-actions">
           <button type="submit">Update</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={toggleEditForm}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>
