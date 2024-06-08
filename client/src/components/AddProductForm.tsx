@@ -23,6 +23,7 @@ export const AddProductForm = ({
     event.preventDefault();
     const newProduct = { title, price, quantity };
     await onAddProduct(newProduct, resetAddProductFormValue);
+    toggleAddForm();
   };
 
   return (
