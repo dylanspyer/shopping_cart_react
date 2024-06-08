@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import { Product as ProductType } from "../types/index.ts";
 import { EditProductForm } from "./EditProductForm.tsx";
 
 interface ProductProps extends ProductType {
-  handleDeleteProduct: (productId: string) => void;
+  onDeleteProduct: (productId: string) => void;
+  onEditProduct: (product: ProductType) => void;
+  onAddToCart: (_id: string) => void;
 }
 
 export const Product = ({
@@ -11,11 +13,22 @@ export const Product = ({
   title,
   price,
   quantity,
-  handleDeleteProduct,
+  onDeleteProduct,
+  onEditProduct,
+  onAddToCart,
 }: ProductProps) => {
   const [showEditForm, setShowEditForm] = useState(false);
   const toggleEditForm = () => {
     setShowEditForm((prevState) => !prevState);
+  };
+
+  const handleAddToCart = (event: SyntheticEvent) => {
+    event.preventDefault();
+    onAddToCart(_id);
+  };
+
+  const disableButton = () => {
+    return quantity === 0;
   };
 
   return (
@@ -25,7 +38,13 @@ export const Product = ({
         <p className="price">{price}</p>
         <p className="quantity">{quantity} left in stock</p>
         <div className="actions product-actions">
-          <button className="add-to-cart">Add to Cart</button>
+          <button
+            disabled={disableButton()}
+            className="add-to-cart"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
           <button className="edit" onClick={toggleEditForm}>
             Edit
           </button>
@@ -35,12 +54,12 @@ export const Product = ({
             initialTitle={title}
             initialPrice={price}
             initialQuantity={quantity}
+            _id={_id}
+            onEditProduct={onEditProduct}
+            toggleEditForm={toggleEditForm}
           />
         ) : null}
-        <button
-          className="delete-button"
-          onClick={() => handleDeleteProduct(_id)}
-        >
+        <button className="delete-button" onClick={() => onDeleteProduct(_id)}>
           <span>X</span>
         </button>
       </div>

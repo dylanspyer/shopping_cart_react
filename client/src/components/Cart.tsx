@@ -1,7 +1,11 @@
 import { CartItem } from "./CartItem";
 import { ProductListing } from "../types/index.ts";
 
-export const Cart = ({ productList }: ProductListing) => {
+interface CartProps extends ProductListing {
+  onCheckout: () => void;
+}
+
+export const Cart = ({ productList, onCheckout }: CartProps) => {
   const total = productList.reduce((acc, cartItem) => {
     return acc + cartItem.quantity * cartItem.price;
   }, 0);
@@ -37,7 +41,9 @@ export const Cart = ({ productList }: ProductListing) => {
         </tfoot>
       </table>
       <div className="checkout-button">
-        <button className="checkout">Checkout</button>
+        <button className="checkout" onClick={onCheckout}>
+          Checkout
+        </button>
       </div>
     </div>
   );

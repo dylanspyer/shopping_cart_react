@@ -6,13 +6,17 @@ import {
 } from "../types/index.ts";
 
 interface ProductListingProps extends ProductListingType {
-  handleDeleteProduct: (productId: string) => void;
+  onDeleteProduct: (productId: string) => void;
+  onEditProduct: (product: ProductType) => void;
+  onAddToCart: (_id: string) => void;
 }
 
 // accepts array of products
 export const ProductListing = ({
   productList,
-  handleDeleteProduct,
+  onDeleteProduct,
+  onEditProduct,
+  onAddToCart,
 }: ProductListingProps) => {
   return (
     <div className="product-listing">
@@ -25,7 +29,9 @@ export const ProductListing = ({
             title={product.title}
             quantity={product.quantity}
             price={product.price}
-            handleDeleteProduct={handleDeleteProduct}
+            onDeleteProduct={onDeleteProduct}
+            onEditProduct={onEditProduct}
+            onAddToCart={onAddToCart}
           />
         ))}
       </ul>

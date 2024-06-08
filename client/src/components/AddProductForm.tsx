@@ -3,9 +3,13 @@ import { NewProduct } from "../types/index";
 
 interface AddProductFormProps {
   onAddProduct: (newProduct: NewProduct, callback: () => void) => void;
+  toggleAddForm: () => void;
 }
 
-export const AddProductForm = ({ onAddProduct }: AddProductFormProps) => {
+export const AddProductForm = ({
+  onAddProduct,
+  toggleAddForm,
+}: AddProductFormProps) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -62,7 +66,9 @@ export const AddProductForm = ({ onAddProduct }: AddProductFormProps) => {
         </div>
         <div className="actions form-actions">
           <button type="submit">Add</button>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={toggleAddForm}>
+            Cancel
+          </button>
         </div>
       </form>
     </div>
