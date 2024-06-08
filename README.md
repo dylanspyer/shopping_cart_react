@@ -1,15 +1,5 @@
 # Shopping Cart App
 
-## Questions
-
-- Re setting the state of the product list: I tried to import the ProductList type as ProductListType and use that instead of an array of products, but it wouldn't work..why?
-
-- I wasn't sure about naming conventions when passing handlers with prop drilling. Whenever I was prop drilling, I named the handler `handle` until I got to where I was using it. For example, when I pass `handleDeleteProduct` from `App` to `ProductListing` to `Product`, then finally I can call `handleDeleteProduct` when the click event fires. Wasn't sure if this was a correct convention.
-
-- Is how I'm handling the edit form correct? Passing in initial values and having the component keep its own state with those as the starting value.
-
-- Before I set the type of `productList` in `App.tsx`, I was getting a weird Typescript error in the `handleEditProduct` function. It seemed like the call to `map` was causing an issue, but I couldn't figure out why. Setting the type of `productList` fixed the issue, but I wasn't super clear why that handler broke, but not the other ones.
-
 ## Setup
 
 1. Install [Node.js](https://nodejs.org/en/download/package-manager/) if you haven't already
