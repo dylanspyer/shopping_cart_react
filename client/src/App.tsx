@@ -10,8 +10,8 @@ import {
   editProduct,
 } from "./services/products";
 import { getCart, addItem, checkOut } from "./services/cartItems";
-import "../assets/index.css";
-import "../assets/whitespace-reset.css";
+import "./assets/index.css";
+import "./assets/whitespace-reset.css";
 
 function App() {
   const [productList, setProductList] = useState<Product[]>([]); // I tried to import the ProductList type as ProductListType and use that instead of an array of products, but it wouldn't work..why?
