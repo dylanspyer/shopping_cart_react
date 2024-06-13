@@ -128,7 +128,7 @@ function App() {
   return (
     <div id="app">
       <header>
-        <h1>The Shop!</h1>
+        <h1>The Shop</h1>
         <Cart productList={cart} onCheckout={handleCheckout} />
       </header>
 
